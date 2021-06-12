@@ -25,9 +25,24 @@ Also, the rudder pedals have a power LED, which i simply hooked up to 5V with an
 
 **TODO:** Upload a picture of the circuit.
 
+### Code
+
+#### HID
+
+This is the main implementation of reading the analog voltages on the potentiometer pins, the auto-calibration, and the USB Gamepad HID communication.
+
+#### ReadTest
+
+This is a project used to test both the general functionality of reading the analog voltages from the potentiometers, and for testing the auto-calibration.
+
+For this, three buttons are connected to pins `2`, `3`, and `4` of the Arduino Micro, which can be used to switch between monitoring the analog pins `A0`, `A1`, and `A2`.
+
+The measured and auto-calibrated values of the given analog pin are simply repeatedly printed on the serial interface, such that they can be easily visualized using the serial plotter of the Arduino IDE.
+
 ### Auto-calibration
 
 To avoid having to deal with manually measuring and then mapping the values which the ADC spits out to the desired value space, I implemented a simple auto-calibration algorithm, which simply adapts the minimum and maximum input values based on the given inputs.
 It also centers the rotation (rudder) axis on power-up.
-Therefore, when using the code, one should have the pedals in neutral position when plugging the USB cable in, and push all three axes to their minimum and maximum positions in order to be properly calibrated.
-This calibration can be resetted by using the calibration reset button (pin `2`, see above).
+Therefore, upon plugging in the USB cable, one should have the pedals in neutral position, and afterwards push all three axes to their minimum and maximum positions in order to properly calibrate.
+
+This calibration can be reset on-the-fly by using the calibration reset button (pin `2`, see above).
